@@ -1,0 +1,5 @@
+CREATE TABLE users (id INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT NOT NULL, email TEXT UNIQUE NOT NULL, password TEXT NOT NULL, role TEXT NOT NULL);
+CREATE TABLE movies (id INTEGER PRIMARY KEY AUTOINCREMENT, title TEXT NOT NULL, genre TEXT, duration TEXT, rating TEXT, description TEXT, poster_path TEXT);
+CREATE TABLE shows (id INTEGER PRIMARY KEY AUTOINCREMENT, movie_id INTEGER REFERENCES movies(id), show_time TEXT NOT NULL, theatre TEXT, screen_number INTEGER);
+CREATE TABLE bookings (id INTEGER PRIMARY KEY AUTOINCREMENT, user_id INTEGER REFERENCES users(id), movie_id INTEGER REFERENCES movies(id), show_id INTEGER REFERENCES shows(id), seats TEXT NOT NULL, total_amount REAL, status TEXT, created_at DATETIME DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE payments (id INTEGER PRIMARY KEY AUTOINCREMENT, booking_id INTEGER REFERENCES bookings(id), amount REAL, payment_method TEXT, payment_status TEXT);
